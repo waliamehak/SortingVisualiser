@@ -21,19 +21,23 @@ class SortingVisualiser extends Component {
         this.setState({ array: generateArray });
 
     }
-    resetColor(time){
+    resetColor(offset){
         const arrayBars = document.getElementsByClassName('array-bar');
         for (let i = 0; i<arrayBars.length; i++){
+            let delay = offset;
         setTimeout(() =>{
             arrayBars[i].style.backgroundColor = 'green'; 
-            time++;
-        }, time*5);}
+            delay+=i;
+        }, delay*5);
+    offset = delay;
+    }
+
         setTimeout(() =>{
             for (let i = 0; i<arrayBars.length; i++){
                 arrayBars[i].style.backgroundColor = 'black'; 
-                time++;
+                offset+=i;
             }
-            }, time*5.5);
+            }, offset*5.5);
     }
     mergeSort() {
         const animations = MergeSort(this.state.array);
