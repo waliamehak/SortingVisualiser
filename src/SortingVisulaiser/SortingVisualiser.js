@@ -21,48 +21,48 @@ class SortingVisualiser extends Component {
         this.setState({ array: generateArray });
 
     }
-    resetColor(offset){
+    resetColor(offset) {
         const arrayBars = document.getElementsByClassName('array-bar');
-        for (let i = 0; i<arrayBars.length; i++){
+        for (let i = 0; i < arrayBars.length; i++) {
             let delay = offset;
-        setTimeout(() =>{
-            arrayBars[i].style.backgroundColor = 'green'; 
-            delay+=i;
-        }, delay*5);
-    offset = delay;
-    }
+            setTimeout(() => {
+                arrayBars[i].style.backgroundColor = 'green';
+                delay += i;
+            }, delay * 5);
+            offset = delay;
+        }
 
-        setTimeout(() =>{
-            for (let i = 0; i<arrayBars.length; i++){
-                arrayBars[i].style.backgroundColor = 'black'; 
-                offset+=i;
+        setTimeout(() => {
+            for (let i = 0; i < arrayBars.length; i++) {
+                arrayBars[i].style.backgroundColor = 'black';
+                offset += i;
             }
-            }, offset*5.5);
+        }, offset * 5.5);
     }
     mergeSort() {
         const animations = MergeSort(this.state.array);
         let c = 0;
         for (let i = 0; i < animations.length; i++) {
-          const arrayBars = document.getElementsByClassName('array-bar');
-          const colorChanged = i % 3 !== 2;
-          if (colorChanged) {
-            const [barOneIdx, barTwoIdx] = animations[i];
-            const barOneStyle = arrayBars[barOneIdx].style;
-            const barTwoStyle = arrayBars[barTwoIdx].style;
-            const color = i % 3 === 0 ? 'red' : '#2372ad';
-            setTimeout(() => {
-              barOneStyle.backgroundColor = color;
-              barTwoStyle.backgroundColor = color;
-            }, i * 5);
-          } else {
-            setTimeout(() => {
-              const [barOneIdx, newHeight] = animations[i];
-              const barOneStyle = arrayBars[barOneIdx].style;
-              barOneStyle.height = `${newHeight}px`;
-             // barOneStyle.backgroundColor = 'black';
-            }, i * 5);
-          }
-          c = i;
+            const arrayBars = document.getElementsByClassName('array-bar');
+            const colorChanged = i % 3 !== 2;
+            if (colorChanged) {
+                const [barOneIdx, barTwoIdx] = animations[i];
+                const barOneStyle = arrayBars[barOneIdx].style;
+                const barTwoStyle = arrayBars[barTwoIdx].style;
+                const color = i % 3 === 0 ? 'red' : '#2372ad';
+                setTimeout(() => {
+                    barOneStyle.backgroundColor = color;
+                    barTwoStyle.backgroundColor = color;
+                }, i * 5);
+            } else {
+                setTimeout(() => {
+                    const [barOneIdx, newHeight] = animations[i];
+                    const barOneStyle = arrayBars[barOneIdx].style;
+                    barOneStyle.height = `${newHeight}px`;
+                    // barOneStyle.backgroundColor = 'black';
+                }, i * 5);
+            }
+            c = i;
         }
         this.resetColor(c);
     }
@@ -70,67 +70,101 @@ class SortingVisualiser extends Component {
         const animations = InsertionSort(this.state.array);
         let offset = 0;
         for (let i = 0; i < animations.length; i++) {
-          const arrayBars = document.getElementsByClassName('array-bar');
-          if (i % 3 !== 1) {
-            const color = i%3 === 0? 'red': '#2372ad';
-            const [barOneIdx, barTwoIdx] = animations[i];
-            const barOneStyle = arrayBars[barOneIdx].style;
-            const barTwoStyle = arrayBars[barTwoIdx].style;
-            setTimeout(() => {
-              barOneStyle.backgroundColor = color;
-              barTwoStyle.backgroundColor = color;
-            }, i * 5);
-          } 
-          else {
-            setTimeout(() => {
-             const [barOneIdx, barTwoIdx] = animations[i-1];
-              const [firstHeight, secondHeight] = animations[i];
-              const barOneStyle = arrayBars[barOneIdx].style;
-              const barTwoStyle = arrayBars[barTwoIdx].style;
-              barOneStyle.height = `${firstHeight}px`;
-              barTwoStyle.height = `${secondHeight}px`;
-              barOneStyle.backgroundColor = '#0ac723';
-              barTwoStyle.backgroundColor = '#0ac723';//green
-            }, i * 5);
-          }
-          offset = i;
+            const arrayBars = document.getElementsByClassName('array-bar');
+            if (i % 3 !== 1) {
+                const color = i % 3 === 0 ? 'red' : '#2372ad';
+                const [barOneIdx, barTwoIdx] = animations[i];
+                const barOneStyle = arrayBars[barOneIdx].style;
+                const barTwoStyle = arrayBars[barTwoIdx].style;
+                setTimeout(() => {
+                    barOneStyle.backgroundColor = color;
+                    barTwoStyle.backgroundColor = color;
+                }, i * 5);
+            }
+            else {
+                setTimeout(() => {
+                    const [barOneIdx, barTwoIdx] = animations[i - 1];
+                    const [firstHeight, secondHeight] = animations[i];
+                    const barOneStyle = arrayBars[barOneIdx].style;
+                    const barTwoStyle = arrayBars[barTwoIdx].style;
+                    barOneStyle.height = `${firstHeight}px`;
+                    barTwoStyle.height = `${secondHeight}px`;
+                    barOneStyle.backgroundColor = '#0ac723';
+                    barTwoStyle.backgroundColor = '#0ac723';//green
+                }, i * 5);
+            }
+            offset = i;
         }
-       this.resetColor(offset);
+        this.resetColor(offset);
     }
     quickSort() {
-        const array = QuickSort(this.state.array);
-        console.log(array === this.state.array.sorted());
+        const animations = QuickSort(this.state.array);
+        let offset = 0;
+        for (let i = 0; i < animations.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar');
+            if (i % 3 !== 1) {
+                const color = i % 3 === 0 ? 'red' : '#2372ad';
+                const [pivotIdx, barOneIdx, barTwoIdx] = animations[i];
+                const pivotStyle = arrayBars[pivotIdx].style;
+                const barOneStyle = arrayBars[barOneIdx].style;
+                const barTwoStyle = arrayBars[barTwoIdx].style;
+                setTimeout(() => {
+                    pivotStyle.backgroundColor= 'yellow';
+                    barOneStyle.backgroundColor = color;
+                    barTwoStyle.backgroundColor = color;
+                }, i * 5);
+            }
+            else {
+                setTimeout(() => {
+                    const [pivotIdx, barOneIdx, barTwoIdx] = animations[i - 1];
+                    const firstHeight = animations[i][1];
+                    const secondHeight = animations[i][2];
+                    const pivotStyle = arrayBars[pivotIdx].style;
+                    const barOneStyle = arrayBars[barOneIdx].style;
+                    const barTwoStyle = arrayBars[barTwoIdx].style;
+                    barOneStyle.height = `${firstHeight}px`;
+                    barTwoStyle.height = `${secondHeight}px`;
+                    pivotStyle.backgroundColor = 'yellow';
+                    barOneStyle.backgroundColor = '#0ac723';
+                    barTwoStyle.backgroundColor = '#0ac723';//green
+                    
+                }, i * 5);
+
+            }
+            offset = i;
+        }
+        this.resetColor(offset);
 
     }
     bubbleSort() {
         const animations = BubbleSort(this.state.array);
-        let offset =0;
+        let offset = 0;
         for (let i = 0; i < animations.length; i++) {
-          const arrayBars = document.getElementsByClassName('array-bar');
-          if (i % 3 !== 1) {
-            const color = i%3 === 0? 'red': '#2372ad';
-            const [barOneIdx, barTwoIdx] = animations[i];
-            const barOneStyle = arrayBars[barOneIdx].style;
-            const barTwoStyle = arrayBars[barTwoIdx].style;
-            setTimeout(() => {
-              barOneStyle.backgroundColor = color;
-              barTwoStyle.backgroundColor = color;
-            }, i * 5);
-          } 
-          else {
-            setTimeout(() => {
-             const [barOneIdx, barTwoIdx] = animations[i-1];
-              const [firstHeight, secondHeight] = animations[i];
-              const barOneStyle = arrayBars[barOneIdx].style;
-              const barTwoStyle = arrayBars[barTwoIdx].style;
-              barOneStyle.height = `${firstHeight}px`;
-              barTwoStyle.height = `${secondHeight}px`;
-              barOneStyle.backgroundColor = '#0ac723';
-              barTwoStyle.backgroundColor = '#0ac723';//green
-            }, i * 5);
+            const arrayBars = document.getElementsByClassName('array-bar');
+            if (i % 3 !== 1) {
+                const color = i % 3 === 0 ? 'red' : '#2372ad';
+                const [barOneIdx, barTwoIdx] = animations[i];
+                const barOneStyle = arrayBars[barOneIdx].style;
+                const barTwoStyle = arrayBars[barTwoIdx].style;
+                setTimeout(() => {
+                    barOneStyle.backgroundColor = color;
+                    barTwoStyle.backgroundColor = color;
+                }, i * 5);
+            }
+            else {
+                setTimeout(() => {
+                    const [barOneIdx, barTwoIdx] = animations[i - 1];
+                    const [firstHeight, secondHeight] = animations[i];
+                    const barOneStyle = arrayBars[barOneIdx].style;
+                    const barTwoStyle = arrayBars[barTwoIdx].style;
+                    barOneStyle.height = `${firstHeight}px`;
+                    barTwoStyle.height = `${secondHeight}px`;
+                    barOneStyle.backgroundColor = '#0ac723';
+                    barTwoStyle.backgroundColor = '#0ac723';//green
+                }, i * 5);
 
-          }
-          offset = i;
+            }
+            offset = i;
         }
         this.resetColor(offset);
     }
@@ -138,23 +172,22 @@ class SortingVisualiser extends Component {
     render() {
         const array = this.state.array
         return (
-            <div className  = 'array-container'>
-                {array.map( (value, idx) => (
+            <div className='array-container'>
+                {array.map((value, idx) => (
                     <div
                         className="array-bar"
                         key={idx}
-                        id='bars'
                         style={{
                             backgroundColor: 'black',
                             height: `${value}px`,
                         }}></div>
                 ))}
                 <div>
-                <button onClick={() => this.resetArray()}>Generate New Array</button>
-                <button onClick={() => this.mergeSort()}>Merge Sort</button>
-                <button onClick={() => this.quickSort()}>Heap Sort</button>
-                <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
-                <button onClick={() => this.insertionSort()}>Insertion Sort</button>
+                    <button onClick={() => this.resetArray()}>Generate New Array</button>
+                    <button onClick={() => this.mergeSort()}>Merge Sort</button>
+                    <button onClick={() => this.quickSort()}>Quick Sort</button>
+                    <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
+                    <button onClick={() => this.insertionSort()}>Insertion Sort</button>
                 </div>
             </div>
         );
