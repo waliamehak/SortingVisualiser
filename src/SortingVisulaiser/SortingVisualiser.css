@@ -1,11 +1,29 @@
 .array-container {
-    position: absolute;
-    left: 100px;
+   position: relative;
+   left: 100px;
+   top:100px;
   }
   
   .array-bar {
+    top : 50%;
     width: 5px;
     display: inline-block;
     margin: 0 1px;
     background-color: black; 
+  }
+
+  button{
+    outline: none;
+    border: none;
+    display: inline-block;
+    color: white;
+    background: rgb(245, 245, 245);
+    padding: 15px 6px;
+    box-shadow: 10px 12px 110px rgba(white, white, white, 1);
+    margin-right: 10px;
+    color: rgb(78, 69, 69);
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 5px; 
+    cursor: pointer;
   }
