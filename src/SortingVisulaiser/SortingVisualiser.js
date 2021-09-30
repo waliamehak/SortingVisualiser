@@ -23,7 +23,6 @@ class SortingVisualiser extends Component {
 
     }
     resetColor(offset) {
-        const buttons = document.getElementsByTagName("button");
         const arrayBars = document.getElementsByClassName('array-bar');
         for (let i = 0; i < arrayBars.length; i++) {
             let delay = offset;
