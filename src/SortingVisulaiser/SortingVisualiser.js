@@ -25,7 +25,7 @@ class SortingVisualiser extends Component {
         for (let i = 0; i < arrayBars.length; i++) { 
             let delay = offset;
             setTimeout(() => {
-                arrayBars[i].style.backgroundColor = 'green';
+                arrayBars[i].style.backgroundColor = '#0ac723';//green
                 delay += i;
             }, delay * hold);
             offset = delay;
@@ -49,7 +49,7 @@ class SortingVisualiser extends Component {
                 const [barOneIdx, barTwoIdx] = animations[i];
                 const barOneStyle = arrayBars[barOneIdx].style;
                 const barTwoStyle = arrayBars[barTwoIdx].style;
-                const color = i % 3 === 0 ? 'red' : '#2372ad';
+                const color = i % 3 === 0 ? 'red' : '#2372ad';//blue
                 setTimeout(() => {
                     barOneStyle.backgroundColor = color;
                     barTwoStyle.backgroundColor = color;
@@ -73,7 +73,7 @@ class SortingVisualiser extends Component {
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             if (i % 3 !== 1) {
-                const color = i % 3 === 0 ? 'red' : '#2372ad';
+                const color = i % 3 === 0 ? 'red' : '#2372ad';//blue
                 const [barOneIdx, barTwoIdx] = animations[i];
                 const barOneStyle = arrayBars[barOneIdx].style;
                 const barTwoStyle = arrayBars[barTwoIdx].style;
@@ -90,7 +90,7 @@ class SortingVisualiser extends Component {
                     const barTwoStyle = arrayBars[barTwoIdx].style;
                     barOneStyle.height = `${firstHeight}px`;
                     barTwoStyle.height = `${secondHeight}px`;
-                    barOneStyle.backgroundColor = '#0ac723';
+                    barOneStyle.backgroundColor = '#0ac723';//green
                     barTwoStyle.backgroundColor = '#0ac723';//green
                 }, i * hold);
             }
