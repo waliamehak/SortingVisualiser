@@ -27,3 +27,8 @@
     border-radius: 5px; 
     cursor: pointer;
   }
+
+  .buttons{
+    position: absolute;
+    padding-top: 24px;
+  }
