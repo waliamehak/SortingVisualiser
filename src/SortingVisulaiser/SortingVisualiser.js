@@ -38,15 +38,7 @@ class SortingVisualiser extends Component {
                 arrayBars[i].style.backgroundColor = 'black';
                 offset += i;
             }
-        }, offset * 5.5);
-        setTimeout(()=>{
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].disabled = true;
-              }
-        }, offset);
-        for (let i = 0; i < buttons.length; i++) {
-          buttons[i].disabled = false;
-        }
+        }, offset * 5.5);        
     }
     mergeSort() {
         const animations = MergeSort(this.state.array);
@@ -190,7 +182,7 @@ class SortingVisualiser extends Component {
                             height: `${value}px`,
                         }}></div>
                 ))}
-                <div>
+                <div className= 'buttons'>
                     <button onClick={() => this.resetArray()}>Generate New Array</button>
                     <button onClick={() => this.mergeSort()}>Merge Sort</button>
                     <button onClick={() => this.quickSort()}>Quick Sort</button>
