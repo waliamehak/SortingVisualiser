@@ -19,17 +19,15 @@ class SortingVisualiser extends Component {
             generateArray.push(this.randomGenerator(10, 500));
         }
         this.setState({ array: generateArray });
-        
-
     }
-    resetColor(offset) {
+    resetColor(offset, hold, reset) {
         const arrayBars = document.getElementsByClassName('array-bar');
-        for (let i = 0; i < arrayBars.length; i++) {
+        for (let i = 0; i < arrayBars.length; i++) { 
             let delay = offset;
             setTimeout(() => {
                 arrayBars[i].style.backgroundColor = 'green';
                 delay += i;
-            }, delay * 5);
+            }, delay * hold);
             offset = delay;
         }
         setTimeout(() => {
@@ -37,11 +35,13 @@ class SortingVisualiser extends Component {
                 arrayBars[i].style.backgroundColor = 'black';
                 offset += i;
             }
-        }, offset * 5.5);        
+        }, offset * (hold+reset));
     }
     mergeSort() {
         const animations = MergeSort(this.state.array);
         let offset = 0;
+        const hold = 5;
+        const reset = 0.4;
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const colorChanged = i % 3 !== 2;
@@ -53,21 +53,23 @@ class SortingVisualiser extends Component {
                 setTimeout(() => {
                     barOneStyle.backgroundColor = color;
                     barTwoStyle.backgroundColor = color;
-                }, i * 5);
+                }, i * hold);
             } else {
                 setTimeout(() => {
                     const [barOneIdx, newHeight] = animations[i];
                     const barOneStyle = arrayBars[barOneIdx].style;
                     barOneStyle.height = `${newHeight}px`;
-                }, i * 5);
+                }, i * hold);
             }
             offset = i;
         }
-        this.resetColor(offset);
+        this.resetColor(offset, hold, reset);
     }
     insertionSort() {
         const animations = InsertionSort(this.state.array);
         let offset = 0;
+        const hold = 3;
+        const reset = 0.15;
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             if (i % 3 !== 1) {
@@ -78,7 +80,7 @@ class SortingVisualiser extends Component {
                 setTimeout(() => {
                     barOneStyle.backgroundColor = color;
                     barTwoStyle.backgroundColor = color;
-                }, i * 5);
+                }, i * hold);
             }
             else {
                 setTimeout(() => {
@@ -90,15 +92,16 @@ class SortingVisualiser extends Component {
                     barTwoStyle.height = `${secondHeight}px`;
                     barOneStyle.backgroundColor = '#0ac723';
                     barTwoStyle.backgroundColor = '#0ac723';//green
-                }, i * 5);
+                }, i * hold);
             }
             offset = i;
         }
-        this.resetColor(offset);
+        this.resetColor(offset, hold, reset);
     }
     quickSort() {
         const animations = QuickSort(this.state.array);
-        let offset = 0;
+        let offset = 0; const hold = 5;
+        const reset = 0.4;
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             if (i % 3 !== 1) {
@@ -108,10 +111,10 @@ class SortingVisualiser extends Component {
                 const barOneStyle = arrayBars[barOneIdx].style;
                 const barTwoStyle = arrayBars[barTwoIdx].style;
                 setTimeout(() => {
-                    pivotStyle.backgroundColor= 'yellow';
+                    pivotStyle.backgroundColor = 'yellow';
                     barOneStyle.backgroundColor = color;
                     barTwoStyle.backgroundColor = color;
-                }, i * 5);
+                }, i * hold);
             }
             else {
                 setTimeout(() => {
@@ -126,18 +129,18 @@ class SortingVisualiser extends Component {
                     pivotStyle.backgroundColor = 'yellow';
                     barOneStyle.backgroundColor = '#0ac723';
                     barTwoStyle.backgroundColor = '#0ac723';//green
-                    
-                }, i * 5);
+
+                }, i * hold);
 
             }
             offset = i;
         }
-        this.resetColor(offset);
-
+        this.resetColor(offset, hold, reset);
     }
     bubbleSort() {
         const animations = BubbleSort(this.state.array);
-        let offset = 0;
+        let offset = 0; const hold = 3;
+        const reset = 0.1;
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             if (i % 3 !== 1) {
@@ -148,7 +151,7 @@ class SortingVisualiser extends Component {
                 setTimeout(() => {
                     barOneStyle.backgroundColor = color;
                     barTwoStyle.backgroundColor = color;
-                }, i * 5);
+                }, i * hold);
             }
             else {
                 setTimeout(() => {
@@ -160,12 +163,12 @@ class SortingVisualiser extends Component {
                     barTwoStyle.height = `${secondHeight}px`;
                     barOneStyle.backgroundColor = '#0ac723';
                     barTwoStyle.backgroundColor = '#0ac723';//green
-                }, i * 5);
+                }, i * hold);
 
             }
             offset = i;
         }
-        this.resetColor(offset);
+        this.resetColor(offset, hold, reset);
     }
 
     render() {
@@ -181,7 +184,7 @@ class SortingVisualiser extends Component {
                             height: `${value}px`,
                         }}></div>
                 ))}
-                <div className= 'buttons'>
+                <div className='buttons'>
                     <button onClick={() => this.resetArray()}>Generate New Array</button>
                     <button onClick={() => this.mergeSort()}>Merge Sort</button>
                     <button onClick={() => this.quickSort()}>Quick Sort</button>
