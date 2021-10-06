@@ -205,7 +205,7 @@ class SortingVisualiser extends Component {
                             height: `${value}px`,
                         }}></div>
                 ))}
-                <div>
+                <div className="buttons">
                     <button id="array" onClick={() => this.resetArray()}>Generate New Array</button>
                     <button id="merge" onClick={() => this.mergeSort()}>Merge Sort</button>
                     <button id="quick" onClick={() => this.quickSort()}>Quick Sort</button>
